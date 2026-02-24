@@ -10,3 +10,6 @@
 アカウントごとの処理
 計算部分でのc++の利用
 GUIにこだわる
+
+ハッシュかの環境構築
+pip install 'passlib[bcrypt]'
