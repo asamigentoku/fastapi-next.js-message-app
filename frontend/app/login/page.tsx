@@ -28,7 +28,7 @@ export default function Home(){
             setName('');
             setPass('');
             setloginname(name);
-            if(data.message=="login success"){
+            if((data.access_token)){
                 setlogin(true);
             }
         }

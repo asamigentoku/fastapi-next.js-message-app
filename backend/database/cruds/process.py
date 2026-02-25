@@ -1,44 +1,33 @@
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
-import database.schemas.schema as schema
+import schemas.schema as schema
 import database.database_models.models as model
 
-#-----------------ユーザー認証-------------------------------
-# simple_hash.py
-import hashlib
-
-def hash_password(password: str) -> str:
-    """平文パスワードを SHA-256 でハッシュ化"""
-    return hashlib.sha256(password.encode()).hexdigest()
-
-def verify_password(password: str, hashed: str) -> bool:
-    """平文とハッシュを比較"""
-    return hash_password(password) == hashed
-
+from login_jwt.hashfunction import get_password_hash,verify_password
+    
+#ユーザー認証
 async def authentication(
     db_session:AsyncSession,
-    data:schema.User_Registration_Schema)->model.User |None:
+    user_name:str,user_pass:str)->model.User |None:
     result = await db_session.execute(
-        select(model.User).where(model.User.user_name==data.user_name)
+        select(model.User).where(model.User.user_name==user_name)
     )
+    #ユーザーが２人いると受け取れない
     user=result.scalar_one_or_none()
     print("ここまでは到達")
     if user:
-        if verify_password(data.user_pass,user.user_pass):
+        if verify_password(user_pass,user.user_pass):
             print("パスワードまで一致")
             return user
         print("パスワード不一致")
         print(f"ユーザ名:{user.user_name}")
-#---------------------------------------------------------
-        
-
 
 #新規登録
 async def insert_user(
     db_session:AsyncSession,
     user_data:schema.User_Registration_Schema)->model.User:
     #ここでユーザーのパスワードをハッシュ化
-    user_data.user_pass=hash_password(user_data.user_pass)
+    user_data.user_pass=get_password_hash(user_data.user_pass)
     print("ハッシュ化成功")
     new_user=model.User(**user_data.model_dump())
     db_session.add(new_user)
@@ -58,6 +47,15 @@ async def get_user_by_id(db_session:AsyncSession,
                          user_id:int)->model.User | None:
     result=await db_session.execute(
         select(model.User).where(model.User.user_id==user_id)
+    )
+    user=result.scalar().first()
+    return user
+
+#特定のメモを取得
+async def get_user_by_name(db_session:AsyncSession,
+                         user_name:str)->model.User | None:
+    result=await db_session.execute(
+        select(model.User).where(model.User.user_name==user_name)
     )
     user=result.scalar().first()
     return user

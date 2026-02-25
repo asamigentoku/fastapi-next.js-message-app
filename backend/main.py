@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from routers.main_router import  router as user_router
+from routers.jwt_router import router as jwt_router
 app=FastAPI()
 
 #CORS設定
@@ -13,6 +14,7 @@ app.add_middleware(
 )
 
 app.include_router(user_router)
+app.include_router(jwt_router)
 
 from fastapi.responses import JSONResponse
 from pydantic import ValidationError

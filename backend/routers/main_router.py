@@ -1,20 +1,11 @@
 from fastapi import APIRouter,HTTPException,Depends,Form
 from sqlalchemy.ext.asyncio import AsyncSession
-from database.schemas.schema import User_Registration_Schema,User_Information_Schema,ResponseSchema
+from schemas.schema import User_Registration_Schema,User_Information_Schema,ResponseSchema
 import database.cruds.process as process
 
 import database.db as db
 
 router=APIRouter(tags=["Users"],prefix="")
-
-#ユーザー認証
-@router.post("/login",response_model=ResponseSchema)
-async def login(data:User_Registration_Schema,db:AsyncSession=Depends(db.get_dbsession)):
-    user=await process.authentication(db,data)
-    if not user:
-        raise HTTPException(status_code=404,detail="ユーザー名またはパスワード名が違います")
-    print("ログイン完了")
-    return ResponseSchema(message="login success")
 
 #登録
 @router.post("/register",response_model=ResponseSchema)

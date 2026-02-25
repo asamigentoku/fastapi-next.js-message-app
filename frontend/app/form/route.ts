@@ -9,12 +9,12 @@ export async function POST(request:Request){
     const login_result=await fetch(url+"/login",{
         method:"POST",
         headers: {
-        "Content-Type": "application/json" ,
+        "Content-Type": "application/x-www-form-urlencoded" ,
         },
-        body:JSON.stringify({
-            user_name:recived_name,
-            user_pass:recived_pass
-        })
+        body:new URLSearchParams({
+            username:recived_name,
+            password:recived_pass
+        }),
     });
 
     const data=await login_result.json();
