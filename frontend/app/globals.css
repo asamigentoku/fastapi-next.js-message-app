@@ -24,3 +24,92 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* ===== ヘッダー ===== */
+.header {
+  background: #16a34a; /* メイングリーン */
+  padding: 30px 0;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.header-content {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 600;
+  color: white;
+  letter-spacing: 1px;
+}
+
+/* ===== フッター ===== */
+.footer {
+  text-align: center;
+  padding: 20px;
+  background: #dcfce7;
+  font-size: 14px;
+  color: #065f46;
+  position:fixed;
+  bottom:0;
+  width:100%;
+}
+
+.footer hr {
+  border: none;
+  height: 1px;
+  background: #16a34a;
+  width: 60%;
+  margin: 0 auto 15px auto;
+}
+
+/* ===== ホーム全体中央配置 ===== */
+.home-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+}
+
+/* ===== カードデザイン ===== */
+.card {
+  background: white;
+  padding: 50px 60px;
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(22, 163, 74, 0.15);
+  text-align: center;
+  max-width: 500px;
+  width: 100%;
+}
+
+/* ===== タイトル ===== */
+.title {
+  font-size: 32px;
+  font-weight: 700;
+  color: #15803d;
+  margin-bottom: 20px;
+}
+
+/* ===== 説明文 ===== */
+.msg {
+  font-size: 16px;
+  color: #4b5563;
+  margin-bottom: 30px;
+}
+
+/* ===== ログインボタン ===== */
+.login-button {
+  display: inline-block;
+  padding: 12px 30px;
+  background: #16a34a;
+  color: white;
+  font-weight: 600;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+.login-button:hover {
+  background: #15803d;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(22, 163, 74, 0.3);
+}

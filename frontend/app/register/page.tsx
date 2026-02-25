@@ -1,14 +1,17 @@
 "use client"
 import {useState} from 'react'
+import Link from 'next/link'
+import "./style.css"
 
 export default function Home(){
     const [name,setName]=useState('')
     const [pass,setPass]=useState('')
-    const doName=(event)=>{
+    const [ifsuccess,setsucsess]=useState(false)
+    const doName=(event: React.ChangeEvent<HTMLInputElement>)=>{
         const val=event.target.value
         setName(val)
     }
-    const doPass=(event)=>{
+    const doPass=(event: React.ChangeEvent<HTMLInputElement>)=>{
         const val=event.target.value
         setPass(val)
     }
@@ -25,6 +28,7 @@ export default function Home(){
             setPass('');
             if(data.message=="registerd"){
                 //登録された後の処理
+                setsucsess(true);
             }
         }
 
@@ -32,22 +36,48 @@ export default function Home(){
             console.log(error);
         }
     }
-    return(
-        <main>
-            <h1>アカウント登録ページ</h1>
-            <form action={register}>
-                <div>
-                    <input type="text" className="input mx-5 my-1"
-                        name="name" value={name} onChange={doName}/>
-                </div>
-                <div>
-                    <input type="text" className="input mx-5 my-1"
-                        name="pass" value={pass} onChange={doPass}/>
-                </div>
-                <div className="mx-3">
-                    <button className="button my-1">Click</button>
-                </div>
-            </form>
+    return (
+    <main className="register-container">
+        <div className="register-card">
+            {!ifsuccess ? (
+            <>
+                <h1 className="register-title">アカウント登録ページ</h1>
+
+                <form action={register} className="register-form">
+                <input
+                    type="text"
+                    name="name"
+                    placeholder="ユーザー名"
+                    value={name}
+                    onChange={doName}
+                    className="register-input"
+                    required
+                />
+
+                <input
+                    type="text"
+                    name="pass"
+                    placeholder="パスワード"
+                    value={pass}
+                    onChange={doPass}
+                    className="register-input"
+                    required
+                />
+
+                <button className="register-button">
+                    登録
+                </button>
+                </form>
+            </>
+            ) : (
+            <>
+                <h1 className="register-success"> アカウント登録が完了しました</h1>
+                <Link href="/login" className="register-button">
+                ログイン画面へ
+                </Link>
+            </>
+            )}
+        </div>
         </main>
-    )
+    );
 }
