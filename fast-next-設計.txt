@@ -16,3 +16,15 @@ JWT認証
 
 ハッシュかの環境構築
 pip install 'passlib[bcrypt]'
+
+トークルームのデータベース
+room_id
+user1_id
+user2_id
+
+メッセージ
+id
+room_id
+user
+conttent
+time

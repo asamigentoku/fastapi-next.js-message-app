@@ -4,7 +4,7 @@ import schemas.schema as schema
 import database.database_models.models as model
 
 from login_jwt.hashfunction import get_password_hash,verify_password
-    
+
 #ユーザー認証
 async def authentication(
     db_session:AsyncSession,
@@ -12,12 +12,10 @@ async def authentication(
     result = await db_session.execute(
         select(model.User).where(model.User.user_name==user_name)
     )
-    #ユーザーが２人いると受け取れない
-    user=result.scalar_one_or_none()
-    print("ここまでは到達")
-    if user:
-        if verify_password(user_pass,user.user_pass):
-            print("パスワードまで一致")
+    users = result.scalars().all()  # 複数件取得
+    for user in users:
+        if verify_password(user_pass, user.user_pass):
+            print("パスワード一致")
             return user
         print("パスワード不一致")
         print(f"ユーザ名:{user.user_name}")

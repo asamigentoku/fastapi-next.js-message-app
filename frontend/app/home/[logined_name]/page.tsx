@@ -1,9 +1,12 @@
-export default async function Page({ params }){
-    const {logined_name}=await params
+type PageProps = {
+    logined_name: string;
+};
+
+export default async function Page({logined_name}:PageProps){
     return(
-        <main>
+        <div>
             <h1>ホーム</h1>
             <p>こんにちわ{logined_name}さん!!</p>
-        </main>
+        </div>
     )
 }
