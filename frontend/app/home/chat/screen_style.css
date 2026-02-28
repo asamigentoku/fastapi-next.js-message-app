@@ -1,0 +1,51 @@
+.talk-container {
+    display: flex;
+    justify-content: flex-end; /* 右寄せ */
+    padding: 20px;
+}
+
+.talk-card {
+    width: 60%;               /* 画面右側60% */
+    max-height: 80vh;         /* 高さ80%でスクロール可能 */
+    padding: 16px;
+    background-color: #f7f7f7;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+.talk-card h2 {
+    margin-bottom: 12px;
+}
+
+.input-user {
+    display: flex;
+    margin-top: 12px;
+    gap: 8px;
+}
+
+.input-user input {
+    flex: 1;
+    padding: 8px 12px;
+    border-radius: 18px;
+    border: 1px solid #ccc;
+    outline: none;
+    font-size: 14px;
+}
+
+.input-user button {
+    padding: 8px 16px;
+    border-radius: 18px;
+    border: none;
+    background-color: #4caf50;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.input-user button:hover {
+    background-color: #45a049;
+}
