@@ -6,10 +6,7 @@ from sqlalchemy.orm import sessionmaker,declarative_base
 Base=declarative_base()
 
 #DBファイルの作成、まずこのファイル自体のパスを取得
-base_dir=os.path.dirname(__file__)
-
-#データベースのURL ファイル名とパスをjoinで繋ぐ
-DATABASE_URL='sqlite+aiosqlite:///'+os.path.join(base_dir,'mydatabase.sqlite')
+DATABASE_URL="postgresql+asyncpg://user:password@localhost:5432/testdb"
 
 #非同期データベースエンジンの作成
 engine=create_async_engine(DATABASE_URL,echo=True)

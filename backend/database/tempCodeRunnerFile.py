@@ -1,3 +1,1 @@
-#スクリプトで実行時のみ実行
-if __name__=="__main__":
-    asyncio.run(init_db())
+DATABASE_URL="postgresql+asyncpg://user:password@localhost:5432/testdb"
