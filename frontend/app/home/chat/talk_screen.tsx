@@ -13,7 +13,8 @@ type Message = {
 
 const url = 'http://localhost:3000/home/chat/message-api'
 
-const fetcher = (...args: any) => fetch(...args).then(res => res.json())
+const fetcher = (...args: any[]) =>
+    fetch(...(args as [any, any])).then(res => res.json())
 
 type TalkScreenProps = {
     user_name: string

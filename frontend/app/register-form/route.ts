@@ -1,5 +1,5 @@
 'use server'
-const url="http://127.0.0.1:8000"
+const url="http://my-backend:8000"
 
 export async function POST(request:Request){
     const formData=await request.formData()
