@@ -5,7 +5,7 @@ import asyncio
 
 
 #データベースのURL ファイル名とパスをjoinで繋ぐ
-DATABASE_URL="postgresql+asyncpg://user:password@localhost:5432/testdb"
+DATABASE_URL = os.getenv("DATABASE_URL")
 
 #非同期データベースエンジンの作成
 engine=create_async_engine(DATABASE_URL,echo=True)

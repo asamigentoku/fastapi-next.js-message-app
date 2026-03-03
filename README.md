@@ -1,2 +1,2 @@
-### データベースサーバーの構築
-        docker compose up -d
+### 実行方法
+        docker compose up --build

@@ -6,7 +6,7 @@ from sqlalchemy.orm import sessionmaker,declarative_base
 Base=declarative_base()
 
 #DBファイルの作成、まずこのファイル自体のパスを取得
-DATABASE_URL="postgresql+asyncpg://user:password@localhost:5432/testdb"
+DATABASE_URL = os.getenv("DATABASE_URL")
 
 #非同期データベースエンジンの作成
 engine=create_async_engine(DATABASE_URL,echo=True)
